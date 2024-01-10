@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            opacity: 1;
+        }
+
+        img {
+            max-width: 100%; /* Make the image responsive */
+            height: auto;
+            opacity: 0.5;
+        }
+        #window {
+            background-color: yellow;
+            border: 1px solid black;
+            box-shadow: 10px 10px 10px black;
+            padding: 10px;
+            z-index: 2;
+            font-size: 2em;
+        }
+    </style>
+</head>
+<body>
+    <img src="./coffee.jpeg" alt="map" />
+
+    <!-- /// [161, 1038],[237, 626],[269, 622],[261, 642],[261, 674],[289, 706],[333, 874],[389, 918],[465, 938],[561, 910],[604, 834],[691, 850],[755, 830],[804, 1062],[780, 1090],[748, 1110],[196, 1106] - scale
+    /// [288, 705],[336, 873],[392, 921],[468, 937],[564, 905],[604, 829],[692, 849],[756, 825],[792, 769],[792, 705],[768, 657],[724, 629],[672, 625],[652, 589],[684, 669],[644, 725],[556, 725],[516, 705],[460, 693],[380, 709],[300, 701] - coffee cup
+    /// [316, 544],[288, 600],[268, 624],[264, 672],[288, 700],[312, 716],[376, 712],[460, 692],[524, 708],[588, 736],[648, 728],[688, 668],[648, 580],[648, 548],[676, 504],[680, 484],[756, 364],[764, 296],[704, 212],[612, 168],[492, 148],[384, 156],[316, 164],[252, 196],[212, 240],[196, 304],[200, 352],[232, 400],[316, 532] - coffee brewer -->
+
+    <!-- layer SVG over image, relatively -->
+    <div id="window" style="display: none;"></div>
+    <script>
+        function toggleWindow (id, text) {
+            var element = document.getElementById(id);
+            
+            if (element.style.display === 'none') {
+                element.style.display = 'block';
+            }
+
+            element.style.position = 'absolute';
+            
+            var top = event.clientY;
+            var left = event.clientX;
+
+            element.style.top = top + 'px';
+            element.style.left = left + 'px';
+            element.innerHTML = text;
+        }
+    </script>
+    <svg width="3024" height="4032" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="161, 1038 237, 626 269, 622 261, 642 261, 674 289, 706 333, 874 389, 918 465, 938 561, 910 604, 834 691, 850 755, 830 804, 1062 780, 1090 748, 1110 196, 1106" style="fill:blue;stroke:purple;stroke-width:1;opacity:0.1" id="scale" onmouseover="this.style.fill='red'" onmouseout="this.style.fill='blue'" onclick="toggleWindow('window', 'This is my Acaia Coffee Scale.')" />
+        <polygon points="288, 705 336, 873 392, 921 468, 937 564, 905 604, 829 692, 849 756, 825 792, 769 792, 705 768, 657 724, 629 672, 625 652, 589 684, 669 644, 725 556, 725 516, 705 460, 693 380, 709 300, 701" style="fill:blue;stroke:purple;stroke-width:1;opacity:0.1" id="coffee-cup" onmouseover="this.style.fill='red'" onmouseout="this.style.fill='blue'" onclick="toggleWindow('window', 'This is my coffee cup.')" />
+        <polygon points="316, 544 288, 600 268, 624 264, 672 288, 700 312, 716 376, 712 460, 692 524, 708 588, 736 648, 728 688, 668 648, 580 648, 548 676, 504 680, 484 756, 364 764, 296 704, 212 612, 168 492, 148 384, 156 316, 164 252, 196 212, 240 196, 304 200, 352 232, 400 316, 532" style="fill:lime;stroke:purple;stroke-width:1;opacity:0.1" id="coffee-brewer" onmouseover="this.style.fill='red'" onmouseout="this.style.fill='lime'" onclick="toggleWindow('window', 'This is my coffee brewer.')" />
+    </svg>
+</body>
+</html>
